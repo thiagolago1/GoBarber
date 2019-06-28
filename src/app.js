@@ -2,6 +2,8 @@
 import express from 'express';
 import routes from './routes';
 
+import './database';
+
 class App {
   /** O construtor ta iniciando o express, as middlewares e as routes por padrão,
   então sempre serão chamados */
