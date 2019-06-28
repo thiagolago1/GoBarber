@@ -35,6 +35,11 @@ class User extends Model {
 
     return this;
   }
+
+  // Checando se a senha é válida
+  checkPassword(password) {
+    return bcrypt.compare(password, this.password_hash);
+  }
 }
 
 export default User;
