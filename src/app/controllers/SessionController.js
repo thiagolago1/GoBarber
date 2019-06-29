@@ -28,7 +28,7 @@ class SessionController {
         email,
       },
       // Token Aleatório e 7 dias para expirar
-      toker: jwt.sign({ id }, authConfig.secret, {
+      token: jwt.sign({ id }, authConfig.secret, {
         expiresIn: authConfig.expiresIn,
       }),
     });
