@@ -9,8 +9,16 @@ class File extends Model {
       {
         // Enviar as colunas dentro da base de dados
         // Os dados não precisam ser um reflexo direto da base de dados
+        // Virtual não existe na base de dados, só no código
         name: Sequelize.STRING,
         path: Sequelize.STRING,
+        url: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            // Como formatar o valor
+            return `http://localhost:3333/files/${this.path}`;
+          },
+        },
       },
       {
         sequelize,
