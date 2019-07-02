@@ -7,7 +7,12 @@ class ProviderController {
       // Retornando apenas os usuários que são providers
       where: { provider: true },
       attributes: ['id', 'name', 'email', 'avatar_id'], // Atributos que serão retornados no where
-      include: [File],
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+        },
+      ],
     });
     return res.json(providers);
   }

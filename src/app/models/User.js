@@ -38,7 +38,7 @@ class User extends Model {
 
   // Acessando as models e adicionando o relacionamento das tagelas fiels com users
   static associate(models) {
-    this.belongsTo(models.File, { foreignKey: 'avatar_id' });
+    this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
   }
 
   // Checando se a senha é válida
