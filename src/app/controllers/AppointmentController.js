@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { startOfHour, parseISO, isBefore } from 'date-fns';
 import Appointment from '../models/Appointment';
 import User from '../models/User';
 
@@ -17,14 +18,38 @@ class AppointmentController {
     const { provider_id, date } = req.body;
 
     // Checar se o provider_id é um provider
-    const isProvider = await User.findOne({
+    const checkIsProvider = await User.findOne({
       where: { id: provider_id, provider: true },
     });
 
-    if (!isProvider) {
+    if (!checkIsProvider) {
       return res
         .status(401)
         .json({ error: 'You Can Only Create Appointments with Providers! ' });
+    }
+
+    // ParseISO transforma a string "Exemplo: 2019-07-01T18:00:00-03:00" em objeto Date JavaScript
+    // Start Of Hour pega apenas o início da hora e não minutos e segundos. "Ex: Se for 19h30, ele pega só 19h"
+    const hourStart = startOfHour(parseISO(date));
+
+    // Check para não passar datas passadas
+    if (isBefore(hourStart, new Date())) {
+      return res.status(400).json({ error: 'Past dates are not permitted' });
+    }
+
+    // Se o provider já não tem um horário. Em tese, não pode ter 2 agendamentos na mesma data
+    const checkAvailability = await Appointment.findOne({
+      where: {
+        provider_id,
+        canceled_at: null,
+        date: hourStart,
+      },
+    });
+
+    if (checkAvailability) {
+      return res
+        .status(400)
+        .json({ error: 'Appointment date is not available!' });
     }
 
     const appointment = await Appointment.create({
