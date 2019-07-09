@@ -1,6 +1,6 @@
 // Configurações de Autenticação
 
 export default {
-  secret: 'f1e4e51c733c348c2eb07c15eb0c2a44',
+  secret: process.env.APP_SECRET,
   expiresIn: '7d',
 };
