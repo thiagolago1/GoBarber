@@ -6,12 +6,12 @@ Base do projeto:
 - Docker
 - Express
 
-Para rodar o servidor via nodemon:
+###Para rodar o servidor via nodemon:
 ```
 yarn dev
 ``` 
 
-Para rodar a Queue
+###Para rodar a Queue
 ```
 yarn queue
 ```
