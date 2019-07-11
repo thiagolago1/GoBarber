@@ -1,6 +1,6 @@
 # GoStack-GoBarber
-###Rocktseat training repository - bootcamp GoStack 
-###Pequena APIRestful com Nodejs e Express
+### Rocktseat training repository - bootcamp GoStack 
+### Pequena APIRestful com Nodejs e Express
 
 Base do projeto:
 - NodeJS
